@@ -19,18 +19,18 @@ class VendaController
 
             // Vamos assumir que o usuário de ID 1 está logado para o teste
             // No futuro, isso seria o usuário da sessão
-            $usuario = $em->getRepository(User::class)->find(1);
+            $user = $em->getRepository(User::class)->find(1);
 
-            if (!$usuario) {
+            if (!$user) {
                 // Se o usuário de teste não existir, cria-o
-                $usuario = new User();
-                $usuario->setName("usuario_teste");
-                $usuario->setPassword(password_hash("123456", PASSWORD_DEFAULT));
-                $em->persist($usuario);
+                $user = new User("usuario_teste", password_hash("123456", PASSWORD_DEFAULT));
+                $user->setName("usuario_teste");
+                $user->setPassword(password_hash("123456", PASSWORD_DEFAULT));
+                $em->persist($user);
                 $em->flush();
             }
 
-            $venda = new Venda($usuario);
+            $venda = new Venda($user);
             $totalVenda = 0;
 
             foreach ($data as $produtoId => $quantidade) {
