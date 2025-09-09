@@ -47,9 +47,21 @@ class User
         $em->persist($this);
         $em->flush();
     }
-    
-    public function validatePassword(): void
-    {
 
+    public function validatePassword(): void {}
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
     }
 }

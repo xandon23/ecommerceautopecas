@@ -19,7 +19,6 @@ class UserController
 
             echo $user->validatePassword('123') ? 'Senha é 123' : 'Senha não é 123';
         }
-        $users = User::findAll();
 
         include __DIR__.'/../View/users.phtml';
     }
