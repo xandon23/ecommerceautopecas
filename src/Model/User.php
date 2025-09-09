@@ -47,4 +47,9 @@ class User
         $em->persist($this);
         $em->flush();
     }
+    
+    public function validatePassword(): void
+    {
+
+    }
 }
