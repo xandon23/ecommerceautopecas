@@ -1,7 +1,10 @@
 <?php
 
+namespace App\Model;
+
 use App\Core\Database;
 use App\Model\Produto;
+use App\Model\Venda; // Esta é a linha que faltava
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -10,7 +13,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 
 #[Entity]
-class Item_Venda
+class ItemVenda
 {
     #[Column, Id, GeneratedValue()]
     private int $id;
@@ -19,18 +22,18 @@ class Item_Venda
     private int $quantidade;
 
     #[ManyToOne(targetEntity: Venda::class)]
-    #[JoinColumn(name: "id_venda", referencedColumnName: "id")]
-    private int $id_venda;
+    #[JoinColumn(name: 'vendaId', referencedColumnName: 'id')]
+    private Venda $venda; // O tipo deve ser o objeto Venda
 
     #[ManyToOne(targetEntity: Produto::class)]
-    #[JoinColumn(name: "id_produto", referencedColumnName: "id")]
-    private int $id_produto;
+    #[JoinColumn(name: 'produtoId', referencedColumnName: 'id')]
+    private Produto $produto; // O tipo deve ser o objeto Produto
 
-    public function __construct(int $quantidade, int $id_venda, int $id_produto)
+    public function __construct(Venda $venda, Produto $produto, int $quantidade)
     {
+        $this->venda = $venda;
+        $this->produto = $produto;
         $this->quantidade = $quantidade;
-        $this->id_venda = $id_venda;
-        $this->id_produto = $id_produto;
     }
 
     public function getId(): int
@@ -43,17 +46,15 @@ class Item_Venda
         return $this->quantidade;
     }
 
-    public function getIdVenda(): int
+    public function getVenda(): Venda
     {
-        return $this->id_venda;
+        return $this->venda;
     }
 
-    public function getIdProduto(): int
+    public function getProduto(): Produto
     {
-        return $this->id_produto;
+        return $this->produto;
     }
-
-
 
     public function save(): void
     {

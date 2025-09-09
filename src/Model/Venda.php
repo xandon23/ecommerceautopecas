@@ -1,13 +1,17 @@
 <?php
 
-use App\Core\Database;
-use App\Model\User;
+namespace App\Model;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
+
 
 #[Entity]
 class Venda
@@ -15,21 +19,25 @@ class Venda
     #[Column, Id, GeneratedValue()]
     private int $id;
 
-    #[Column]
-    private DateTime $data;
+    #[Column(type: 'date')]
+    private \DateTimeInterface $data;
 
-    #[Column]
-    private float $vtotal;
+    #[Column(type: 'decimal', precision: 10, scale: 2)]
+    private float $total;
 
     #[ManyToOne(targetEntity: User::class)]
-    #[JoinColumn(name: "id_user", referencedColumnName: "id")]
-    private int $id_user;
+    #[JoinColumn(name: "usuariosID", referencedColumnName: "id")]
+    private User $usuario;
 
-    public function __construct(DateTime $data, float $vtotal, int $id_user)
+    #[OneToMany(mappedBy: "venda", targetEntity: ItemVenda::class, cascade: ["persist", "remove"])]
+    private Collection $itens;
+
+    public function __construct(User $usuario)
     {
-        $this->data = $data;
-        $this->vtotal = $vtotal;
-        $this->id_user = $id_user;
+        $this->usuario = $usuario;
+        $this->data = new \DateTime('now');
+        $this->total = 0.0;
+        $this->itens = new ArrayCollection();
     }
 
     public function getId(): int
@@ -37,25 +45,38 @@ class Venda
         return $this->id;
     }
 
-    public function getData(): DateTime
+    public function getData(): \DateTimeInterface
     {
         return $this->data;
     }
 
-    public function getVtotal(): float
+    public function getTotal(): float
     {
-        return $this->vtotal;
+        return $this->total;
+    }
+    
+    public function setTotal(float $total): void
+    {
+        $this->total = $total;
     }
 
-    public function getIdUser(): int
+    public function getUsuario(): User
     {
-        return $this->id_user;
+        return $this->usuario;
     }
 
-    public function save(): void
+    /**
+     * @return Collection<int, ItemVenda>
+     */
+    public function getItens(): Collection
     {
-        $em = Database::getEntityManager();
-        $em->persist($this);
-        $em->flush();
+        return $this->itens;
+    }
+    
+    public function addItem(ItemVenda $item): void
+    {
+        if (!$this->itens->contains($item)) {
+            $this->itens->add($item);
+        }
     }
 }

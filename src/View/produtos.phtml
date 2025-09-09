@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Produtos - Sistema de Vendas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1em; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h2>Lista de Produtos</h2>
+    <a href="/index.php?controller=produto&action=adicionar">Adicionar Novo Produto</a>
+
+    <?php if (empty($produtos)): ?>
+        <p>Nenhum produto cadastrado.</p>
+    <?php else: ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Valor de Custo</th>
+                    <th>Valor de Venda</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($produtos as $produto): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($produto->getId()); ?></td>
+                    <td><?php echo htmlspecialchars($produto->getName()); ?></td>
+                    <td><?php echo htmlspecialchars($produto->getCategoria()); ?></td>
+                    <td>R$ <?php echo htmlspecialchars(number_format($produto->getValorcusto(), 2, ',', '.')); ?></td>
+                    <td>R$ <?php echo htmlspecialchars(number_format($produto->getValorvenda(), 2, ',', '.')); ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
+</body>
+</html>

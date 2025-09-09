@@ -65,4 +65,21 @@ class Produto
         $em->persist($this);
         $em->flush();
     }
+
+    /**
+    * @return Produto[]
+    */
+    
+    public static function findAll(): array
+    {
+        $em = Database::getEntityManager();
+        return $em->getRepository(Produto::class)->findAll();
+    }
+
+    public static function find(int $id): ?Produto
+    {
+        $em = Database::getEntityManager();
+        return $em->find(Produto::class, $id);
+    }
+    
 }
