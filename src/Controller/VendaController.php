@@ -71,4 +71,14 @@ class VendaController
         // Passa a lista de produtos para a View
         require_once __DIR__ . '/../View/vendas.phtml';
     }
+
+    public function listar()
+    {
+        // 1. Interage com o Modelo (busca todas as vendas)
+        $em = Database::getEntityManager();
+        $vendas = $em->getRepository(Venda::class)->findAll();
+
+        // 2. Carrega a Visão e passa os dados
+        require_once __DIR__ . '/../View/vendas_lista.phtml';
+    }
 }  

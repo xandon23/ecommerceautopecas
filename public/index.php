@@ -1,55 +1,36 @@
 <?php
 
-// Ativa a exibição de erros para ajudar na depuração
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Inclui o autoload do Composer
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\Controller\VendaController; // Adicione esta linha
-use App\Controller\ProdutoController;
-
-// Define a ação padrão e o controlador padrão
-$controllerName = isset($_GET['controller']) ? ucfirst($_GET['controller']) . 'Controller' : 'ProdutoController';
+// Define o controlador e a ação padrão
+$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'venda';
 $actionName = isset($_GET['action']) ? $_GET['action'] : 'index';
 
-// Cria o caminho completo para o controlador
-$controllerClass = "App\\Controller\\" . $controllerName;
+// Formata o nome da classe do controlador
+$controllerClass = "App\\Controller\\" . ucfirst($controllerName) . 'Controller';
 
-if (class_exists($controllerClass)) {
-    $controller = new $controllerClass();
-
-    if (method_exists($controller, $actionName)) {
-        // Executa a ação do controlador
-        $controller->$actionName();
-    } else {
-        // Se a ação não existir
-        echo "Ação não encontrada!";
-    }
-} else {
-    // Se o controlador não existir
-    echo "Controlador não encontrado!";
+// Verifica se a classe do controlador existe
+if (!class_exists($controllerClass)) {
+    http_response_code(404);
+    echo "<h1>404 Not Found</h1>";
+    echo "<p>O controlador " . htmlspecialchars($controllerName) . " não foi encontrado.</p>";
+    exit;
 }
 
-$controllerName = isset($_GET['controller']) ? ucfirst($_GET['controller']) . 'Controller' : 'VendaController'; // Mude o valor padrão para 'VendaController'
-$actionName = isset($_GET['action']) ? $_GET['action'] : 'index';
+// Cria uma instância do controlador
+$controller = new $controllerClass();
 
-// Cria o caminho completo para o controlador
-$controllerClass = "App\\Controller\\" . $controllerName;
-
-if (class_exists($controllerClass)) {
-    $controller = new $controllerClass();
-
-    if (method_exists($controller, $actionName)) {
-        // Executa a ação do controlador
-        $controller->$actionName();
-    } else {
-        // Se a ação não existir
-        echo "Ação não encontrada!";
-    }
-} else {
-    // Se o controlador não existir
-    echo "Controlador não encontrado!";
+// Verifica se o método de ação existe
+if (!method_exists($controller, $actionName)) {
+    http_response_code(404);
+    echo "<h1>404 Not Found</h1>";
+    echo "<p>A ação " . htmlspecialchars($actionName) . " não foi encontrada no controlador " . htmlspecialchars($controllerName) . ".</p>";
+    exit;
 }
+
+// Executa a ação
+$controller->$actionName();
