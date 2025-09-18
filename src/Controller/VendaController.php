@@ -69,7 +69,10 @@ class VendaController
         $produtos = $em->getRepository(Produto::class)->findAll();
 
         // Passa a lista de produtos para a View
-        require_once __DIR__ . '/../View/vendas.phtml';
+        $content_view = __DIR__ . '/../View/vendas.phtml';
+
+        // Carrega o layout principal
+        require_once __DIR__ . '/../View/layout.phtml';
     }
 
     public function listar()
@@ -79,7 +82,10 @@ class VendaController
         $vendas = $em->getRepository(Venda::class)->findAll();
 
         // 2. Carrega a Visão e passa os dados
-        require_once __DIR__ . '/../View/vendas_lista.phtml';
+        $content_view = __DIR__ . '/../View/vendas_lista.phtml';
+
+        // Carrega o layout principal
+        require_once __DIR__ . '/../View/layout.phtml';
     }
 
     public function detalhes()
@@ -107,6 +113,9 @@ class VendaController
         $itens = $venda->getItens();
 
         // Carrega a nova View de detalhes da venda
-        require_once __DIR__ . '/../View/venda_detalhe.phtml';
+        $content_view = __DIR__ . '/../View/venda_detalhe.phtml';
+
+        // Carrega o layout principal
+        require_once __DIR__ . '/../View/layout.phtml';
     }
 }

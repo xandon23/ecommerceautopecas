@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Parts.COM - Sistema de Vendas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background-color: #f0f0f0; }
+        .container { max-width: 1000px; margin: 20px auto; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .header { background-color: #333; color: white; padding: 20px; text-align: center; }
+        .header h1 { margin: 0; }
+        .navigation { background-color: #444; overflow: hidden; }
+        .navigation a { float: left; display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; }
+        .navigation a:hover { background-color: #555; }
+        .content { padding: 20px; min-height: 400px; }
+        .login-box { max-width: 400px; margin: 50px auto; text-align: center; }
+        .login-box .form-container { background-color: #3e78b1; padding: 30px; border-radius: 10px; }
+        .login-box input { width: 80%; padding: 10px; margin: 10px 0; border: none; border-radius: 5px; }
+        .login-box button { background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Parts.COM</h1>
+        </div>
+
+        <div class="navigation">
+            <a href="/index.php?controller=produto&action=index">Adicionar Produtos</a>
+            <a href="/index.php?controller=venda&action=index">Vender Produtos</a>
+            <a href="/index.php?controller=venda&action=listar">Relatório de Vendas</a>
+        </div>
+
+        <div class="content">
+            <?php require_once $content_view; ?>
+        </div>
+    </div>
+</body>
+</html>

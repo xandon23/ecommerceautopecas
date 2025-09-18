@@ -19,7 +19,7 @@ class Venda
     #[Column, Id, GeneratedValue()]
     private int $id;
 
-    #[Column(type: 'date')]
+    #[Column(type: 'datetime')]
     private \DateTimeInterface $data;
 
     #[Column(type: 'decimal', precision: 10, scale: 2)]

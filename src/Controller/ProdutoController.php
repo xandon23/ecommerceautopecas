@@ -12,7 +12,10 @@ class ProdutoController
         $produtos = Produto::findAll();
 
         // 2. Carregar a Visão e passar os dados
-        require_once __DIR__ . '/../View/produtos.phtml';
+        $content_view = __DIR__ . '/../View/produtos.phtml';
+
+        // Carrega o layout
+        require_once __DIR__ . '/../View/layout.phtml';
     }
 
     public function adicionar()
@@ -37,7 +40,10 @@ class ProdutoController
         }
 
         // Se a requisição não for POST, apenas exibe a página de adicionar produto
-        require_once __DIR__ . '/../View/adicionar_produto.phtml';
+        $content_view = __DIR__ . '/../View/adicionar_produto.phtml';
+
+        // Carrega o layout
+        require_once __DIR__ . '/../View/layout.phtml';
 
     }
 }

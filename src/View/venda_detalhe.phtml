@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Detalhes da Venda - Sistema de Vendas</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 2em; }
-        .venda-header, .venda-itens { margin-bottom: 2em; }
-        table { width: 100%; border-collapse: collapse; margin-top: 1em; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-    </style>
-</head>
-<body>
+
     <h2>Detalhes da Venda #<?php echo htmlspecialchars($venda->getId()); ?></h2>
     <a href="/index.php?controller=venda&action=listar">Voltar para a Lista de Vendas</a>
 
@@ -43,5 +30,3 @@
             </tbody>
         </table>
     </div>
-</body>
-</html>

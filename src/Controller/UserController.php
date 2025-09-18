@@ -10,7 +10,10 @@ class UserController
     // Método para exibir o formulário de login (GET)
     public function login()
     {
-        require_once __DIR__ . '/../View/login.phtml';
+        $content_view = __DIR__ . '/../View/login.phtml';
+
+        // Carrega o layout
+        require_once __DIR__ . '/../View/layout.phtml';
     }
 
     // Método para processar a autenticação (POST)
