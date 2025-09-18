@@ -50,7 +50,8 @@ class VendaController
                 $venda->setTotal($totalVenda);
                 $em->persist($venda);
                 $em->flush();
-                echo "Venda criada com sucesso! Total: R$ " . number_format($totalVenda, 2, ',', '.');
+                header("Location: /index.php?controller=venda&action=listar");
+                exit(); // Interrompe a execução do script
             } else {
                 echo "Nenhum produto foi selecionado para a venda.";
             }

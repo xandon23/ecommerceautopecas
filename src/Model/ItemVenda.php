@@ -4,7 +4,7 @@ namespace App\Model;
 
 use App\Core\Database;
 use App\Model\Produto;
-use App\Model\Venda; // Esta é a linha que faltava
+use App\Model\Venda; 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
