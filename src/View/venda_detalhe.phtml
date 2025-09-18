@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Venda - Sistema de Vendas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        .venda-header, .venda-itens { margin-bottom: 2em; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1em; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h2>Detalhes da Venda #<?php echo htmlspecialchars($venda->getId()); ?></h2>
+    <a href="/index.php?controller=venda&action=listar">Voltar para a Lista de Vendas</a>
+
+    <div class="venda-header">
+        <p><strong>Data da Venda:</strong> <?php echo htmlspecialchars($venda->getData()->format('d/m/Y H:i')); ?></p>
+        <p><strong>Total da Venda:</strong> R$ <?php echo htmlspecialchars(number_format($venda->getTotal(), 2, ',', '.')); ?></p>
+    </div>
+
+    <div class="venda-itens">
+        <h3>Produtos Comprados:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome do Produto</th>
+                    <th>Preço Unitário</th>
+                    <th>Quantidade</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($venda->getItens() as $item): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($item->getProduto()->getName()); ?></td>
+                    <td>R$ <?php echo htmlspecialchars(number_format($item->getProduto()->getValorvenda(), 2, ',', '.')); ?></td>
+                    <td><?php echo htmlspecialchars($item->getQuantidade()); ?></td>
+                    <td>R$ <?php echo htmlspecialchars(number_format($item->getProduto()->getValorvenda() * $item->getQuantidade(), 2, ',', '.')); ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
