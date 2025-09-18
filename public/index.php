@@ -1,34 +1,33 @@
 <?php
 
-// Ativa a exibição de erros para ajudar na depuração
+// Ativa a exibição de erros
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Inclui o autoload do Composer
+// Inclui o Autoload do Composer
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\Controller\VendaController; 
-use App\Controller\ProdutoController;
+// Define o controlador e a ação padrão
+$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'user';
+$actionName = isset($_GET['action']) ? $_GET['action'] : 'login';
 
-// Define a ação padrão e o controlador padrão
-$controllerName = isset($_GET['controller']) ? ucfirst($_GET['controller']) . 'Controller' : 'ProdutoController';
-$actionName = isset($_GET['action']) ? $_GET['action'] : 'index';
+// Formata o nome da classe do controlador
+$controllerClass = "App\\Controller\\" . ucfirst($controllerName) . 'Controller';
 
-// Cria o caminho completo para o controlador
-$controllerClass = "App\\Controller\\" . $controllerName;
-
+// Verifica se a classe do controlador existe e cria uma instância
 if (class_exists($controllerClass)) {
     $controller = new $controllerClass();
-
-    if (method_exists($controller, $actionName)) {
-        // Executa a ação do controlador
-        $controller->$actionName();
-    } else {
-        // Se a ação não existir
-        echo "Ação não encontrada!";
-    }
 } else {
-    // Se o controlador não existir
     echo "Controlador não encontrado!";
+    exit;
+}
+
+// Verifica se a ação existe no controlador
+if (method_exists($controller, $actionName)) {
+    // Executa a ação
+    $controller->$actionName();
+} else {
+    echo "Ação não encontrada!";
+    exit;
 }

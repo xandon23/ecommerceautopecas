@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Vendas - Sistema de Vendas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1em; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h2>Histórico de Vendas</h2>
+    <a href="/index.php?controller=venda&action=index">Registar Nova Venda</a>
+
+    <?php if (empty($vendas)): ?>
+        <p>Nenhuma venda foi registada ainda.</p>
+    <?php else: ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID da Venda</th>
+                    <th>Data</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($vendas as $venda): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($venda->getId()); ?></td>
+                    <td><?php echo htmlspecialchars($venda->getData()->format('d/m/Y H:i')); ?></td>
+                    <td>R$ <?php echo htmlspecialchars(number_format($venda->getTotal(), 2, ',', '.')); ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
+</body>
+</html>
