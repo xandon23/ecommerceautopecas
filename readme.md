@@ -31,13 +31,13 @@ Execute o seguinte comando na raiz do projeto para criar as tabelas a partir das
 ```
 composer create-db
 ```
-Instalação das Dependências
+- Instalação das Dependências
 
 Na raiz do projeto, execute o comando para instalar todas as bibliotecas PHP necessárias:
 ```
 composer install
 ```
-Execução da Aplicação
+- Execução da Aplicação
 
 Abra o terminal na pasta public e inicie o servidor interno do PHP:
 ```
@@ -45,7 +45,7 @@ composer start
 ```
 Em seguida, aceda à aplicação no seu navegador: http://localhost:8000
 
-- Membros da Equipe
+# Membros da Equipe:
 Alexandre de Jesus Gonçalves - RA: 20.2840-5
 
 DER (Diagrama de Entidade-Relacionamento)
