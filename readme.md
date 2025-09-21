@@ -1,8 +1,8 @@
-##Nome do Projeto: Sistema de Gestão de Vendas
-#Descrição do Sistema
+## Nome do Projeto: Sistema de Gestão de Vendas
+# Descrição do Sistema
 Este é um pequeno sistema de gestão de vendas, desenvolvido como projeto prático do curso de Tecnologia, Análise e Desenvolvimento de Sistemas. O seu principal objetivo é aplicar os conhecimentos de PHP com Orientação a Objetos (POO), utilizando o padrão de arquitetura MVC (Model-View-Controller) e a biblioteca Doctrine ORM para a manipulação de um banco de dados MySQL.
 
-#O sistema permite:
+# O sistema permite:
 
 Autenticação de utilizadores (login).
 
@@ -12,7 +12,7 @@ Registo de vendas com múltiplos itens.
 
 Relatórios de vendas, com a visualização do histórico e detalhes de cada transação.
 
-#Instruções de Instalação e Execução:
+# Instruções de Instalação e Execução:
 Siga os passos abaixo para configurar e executar a aplicação no seu ambiente local.
 
 Pré-requisitos
@@ -29,21 +29,18 @@ Crie um banco de dados MySQL com o nome sistema_vendas_db.
 
 Execute o seguinte comando na raiz do projeto para criar as tabelas a partir das entidades do Doctrine:
 ```
-Bash
 php bin/doctrine orm:schema:update --force
 ```
 Instalação das Dependências
 
 Na raiz do projeto, execute o comando para instalar todas as bibliotecas PHP necessárias:
 ```
-Bash
 composer install
 ```
 Execução da Aplicação
 
 Abra o terminal na pasta public e inicie o servidor interno do PHP:
 ```
-Bash
 php -S localhost:8000
 ```
 Em seguida, aceda à aplicação no seu navegador: http://localhost:8000
