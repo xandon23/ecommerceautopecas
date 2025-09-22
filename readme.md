@@ -45,7 +45,7 @@ composer start
 ```
 Em seguida, aceda à aplicação no seu navegador: http://localhost:8000
 
-# Membros da Equipe:
+## Membros da Equipe:
 - Alexandre de Jesus Gonçalves - RA: 20.2840-5
 
 DER (Diagrama de Entidade-Relacionamento)
