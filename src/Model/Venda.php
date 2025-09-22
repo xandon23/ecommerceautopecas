@@ -65,9 +65,6 @@ class Venda
         return $this->usuario;
     }
 
-    /**
-     * @return Collection<int, ItemVenda>
-     */
     public function getItens(): Collection
     {
         return $this->itens;

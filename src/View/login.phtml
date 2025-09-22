@@ -3,15 +3,15 @@
         <h2>Login de Usuário</h2>
         
         <?php if (isset($_GET['erro'])): ?>
-            <p style="color:red; margin-bottom: 20px;">Nome de usuário ou senha incorretos. Tente novamente.</p>
+            <p class="error-message">Nome de usuário ou senha incorretos. Tente novamente.</p>
         <?php endif; ?>
 
         <form action="/index.php?controller=user&action=autenticar" method="POST">
-            <label for="name" style="color:white;">Nome de Usuário:</label><br>
-            <input type="text" id="name" name="name" required><br><br>
+            <label for="name">Nome de Usuário:</label>
+            <input type="text" id="name" name="name" required>
 
-            <label for="password" style="color:white;">Senha:</label><br>
-            <input type="password" id="password" name="password" required><br><br>
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
 
             <button type="submit" class="button-action">Entrar</button>
         </form>

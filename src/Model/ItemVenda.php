@@ -23,11 +23,11 @@ class ItemVenda
 
     #[ManyToOne(targetEntity: Venda::class)]
     #[JoinColumn(name: 'vendaId', referencedColumnName: 'id')]
-    private Venda $venda; // O tipo deve ser o objeto Venda
+    private Venda $venda; 
 
     #[ManyToOne(targetEntity: Produto::class)]
     #[JoinColumn(name: 'produtoId', referencedColumnName: 'id')]
-    private Produto $produto; // O tipo deve ser o objeto Produto
+    private Produto $produto; 
 
     public function __construct(Venda $venda, Produto $produto, int $quantidade)
     {

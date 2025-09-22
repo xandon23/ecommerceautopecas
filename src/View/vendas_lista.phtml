@@ -3,20 +3,20 @@
 <?php if (empty($vendas)): ?>
     <p>Nenhuma venda foi registada ainda.</p>
 <?php else: ?>
-    <table style="width:100%; border-collapse: collapse; margin-top: 1em;">
+    <table class="styled-table">
         <thead>
-            <tr style="background-color: #f2f2f2;">
-                <th style="padding: 8px; text-align: left;">ID da Venda</th>
-                <th style="padding: 8px; text-align: left;">Data</th>
-                <th style="padding: 8px; text-align: left;">Total</th>
+            <tr>
+                <th>ID da Venda</th>
+                <th>Data</th>
+                <th>Total</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($vendas as $venda): ?>
             <tr>
-                <td style="padding: 8px;"><a href="/index.php?controller=venda&action=detalhes&id=<?php echo $venda->getId(); ?>"><?php echo htmlspecialchars($venda->getId()); ?></a></td>
-                <td style="padding: 8px;"><a href="/index.php?controller=venda&action=detalhes&id=<?php echo $venda->getId(); ?>"><?php echo htmlspecialchars($venda->getData()->format('d/m/Y H:i')); ?></a></td>
-                <td style="padding: 8px;"><a href="/index.php?controller=venda&action=detalhes&id=<?php echo $venda->getId(); ?>">R$ <?php echo htmlspecialchars(number_format($venda->getTotal(), 2, ',', '.')); ?></a></td>
+                <td><a href="/index.php?controller=venda&action=detalhes&id=<?php echo $venda->getId(); ?>"><?php echo htmlspecialchars($venda->getId()); ?></a></td>
+                <td><a href="/index.php?controller=venda&action=detalhes&id=<?php echo $venda->getId(); ?>"><?php echo htmlspecialchars($venda->getData()->format('d/m/Y H:i')); ?></a></td>
+                <td><a href="/index.php?controller=venda&action=detalhes&id=<?php echo $venda->getId(); ?>">R$ <?php echo htmlspecialchars(number_format($venda->getTotal(), 2, ',', '.')); ?></a></td>
             </tr>
             <?php endforeach; ?>
         </tbody>

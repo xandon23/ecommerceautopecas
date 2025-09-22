@@ -48,10 +48,6 @@ class User
         $em->flush();
     }
 
-    /**
-     * @param string $plainPassword A senha em texto puro a ser verificada.
-     * @return bool Retorna true se a senha for válida, false caso contrário.
-     */
     public function validatePassword(string $plainPassword): bool
     {
         return password_verify($plainPassword, $this->password);

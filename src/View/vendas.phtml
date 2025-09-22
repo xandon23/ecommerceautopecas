@@ -1,34 +1,28 @@
-<h2>Nova Venda</h2>
-
 <form action="/index.php?controller=venda&action=criar" method="POST">
-    <table style="width:100%; border-collapse: collapse; margin-top: 1em;">
+    <table class="styled-table">
         <thead>
-            <tr style="background-color: #f2f2f2;">
-                <th style="padding: 8px; text-align: left;">Produto</th>
-                <th style="padding: 8px; text-align: left;">Valor de Venda</th>
-                <th style="padding: 8px; text-align: left;">Quantidade</th>
+            <tr>
+                <th>Produto</th>
+                <th>Valor de Venda</th>
+                <th>Quantidade</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($produtos as $produto): ?>
             <tr>
-                <td style="padding: 8px;">
-                    <?php echo htmlspecialchars($produto->getName()); ?>
-                </td>
-                <td style="padding: 8px;">
-                    R$ <?php echo htmlspecialchars(number_format($produto->getValorvenda(), 2, ',', '.')); ?>
-                </td>
-                <td style="padding: 8px;">
-                    <input type="number" 
-                           name="produtos[<?php echo $produto->getId(); ?>]" 
-                           value="0" 
+                <td><?php echo htmlspecialchars($produto->getName()); ?></td>
+                <td>R$ <?php echo htmlspecialchars(number_format($produto->getValorvenda(), 2, ',', '.')); ?></td>
+                <td>
+                    <input type="number"
+                           name="produtos[<?php echo $produto->getId(); ?>]"
+                           value="0"
                            min="0"
-                           style="width: 60px;">
+                           class="input-quantidade">
                 </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 
-    <button type="submit" style="margin-top: 20px; padding: 10px 15px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Finalizar Venda</button>
+    <button type="submit" class="button-action" style="margin-top: 20px;">Finalizar Venda</button>
 </form>

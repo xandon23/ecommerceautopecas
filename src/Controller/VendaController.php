@@ -11,18 +11,25 @@ use App\Core\Database;
 
 class VendaController
 {
+    private function verificarAutenticacao()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: /index.php?controller=user&action=login");
+            exit();
+        }
+    }
+
     public function criar()
     {
+        $this->verificarAutenticacao();
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $em = Database::getEntityManager();
             $data = $_POST['produtos'] ?? [];
 
-            // Vamos assumir que o usuário de ID 1 está logado para o teste
-            // No futuro, isso seria o usuário da sessão
             $user = $em->getRepository(User::class)->find(1);
 
             if (!$user) {
-                // Se o usuário de teste não existir, cria-o
                 $user = new User("usuario_teste", password_hash("123456", PASSWORD_DEFAULT));
                 $user->setName("usuario_teste");
                 $user->setPassword(password_hash("123456", PASSWORD_DEFAULT));
@@ -51,46 +58,43 @@ class VendaController
                 $em->persist($venda);
                 $em->flush();
                 header("Location: /index.php?controller=venda&action=listar");
-                exit(); // Interrompe a execução do script
+                exit();
             } else {
                 echo "Nenhum produto foi selecionado para a venda.";
             }
         } else {
-            // Se não for um POST, redireciona para o formulário de vendas
-            // Por agora, vamos apenas mostrar uma mensagem
             echo "Acesso inválido. Use um formulário POST para criar uma venda.";
         }
     }
 
     public function index()
     {
-        // Obtém o EntityManager para buscar os produtos
+        $this->verificarAutenticacao();
+
         $em = Database::getEntityManager();
         $produtos = $em->getRepository(Produto::class)->findAll();
 
-        // Passa a lista de produtos para a View
         $content_view = __DIR__ . '/../View/vendas.phtml';
 
-        // Carrega o layout principal
         require_once __DIR__ . '/../View/layout.phtml';
     }
 
     public function listar()
     {
-        // 1. Interage com o Modelo (busca todas as vendas)
+        $this->verificarAutenticacao();
+
         $em = Database::getEntityManager();
         $vendas = $em->getRepository(Venda::class)->findAll();
 
-        // 2. Carrega a Visão e passa os dados
         $content_view = __DIR__ . '/../View/vendas_lista.phtml';
 
-        // Carrega o layout principal
         require_once __DIR__ . '/../View/layout.phtml';
     }
 
     public function detalhes()
     {
-        // Verifica se o ID foi passado na URL
+        $this->verificarAutenticacao();
+
         if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
             http_response_code(404);
             echo "ID da venda não encontrado.";
@@ -100,7 +104,6 @@ class VendaController
         $vendaId = $_GET['id'];
         $em = Database::getEntityManager();
 
-        // Busca a venda e seus itens associados
         $venda = $em->getRepository(Venda::class)->find($vendaId);
 
         if (!$venda) {
@@ -109,13 +112,7 @@ class VendaController
             exit();
         }
 
-        // Acessa a coleção de itens para passá-la para a view
-        $itens = $venda->getItens();
-
-        // Carrega a nova View de detalhes da venda
         $content_view = __DIR__ . '/../View/venda_detalhe.phtml';
-
-        // Carrega o layout principal
         require_once __DIR__ . '/../View/layout.phtml';
     }
 }

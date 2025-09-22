@@ -66,10 +66,6 @@ class Produto
         $em->flush();
     }
 
-    /**
-    * @return Produto[]
-    */
-    
     public static function findAll(): array
     {
         $em = Database::getEntityManager();

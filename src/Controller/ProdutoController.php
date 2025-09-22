@@ -6,43 +6,43 @@ use App\Model\Produto;
 
 class ProdutoController
 {
+    private function verificarAutenticacao()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: /index.php?controller=user&action=login");
+            exit();
+        }
+    }
+
     public function index()
     {
-        // 1. Interagir com o Modelo (buscar dados)
+        $this->verificarAutenticacao(); 
+        
         $produtos = Produto::findAll();
 
-        // 2. Carregar a Visão e passar os dados
         $content_view = __DIR__ . '/../View/produtos.phtml';
 
-        // Carrega o layout
         require_once __DIR__ . '/../View/layout.phtml';
     }
 
     public function adicionar()
     {
-        // Verifica se a requisição foi um POST
+        $this->verificarAutenticacao(); 
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Pega os dados do formulário
             $name = $_POST['name'] ?? '';
             $categoria = $_POST['categoria'] ?? '';
             $valorcusto = $_POST['valorcusto'] ?? 0.0;
             $valorvenda = $_POST['valorvenda'] ?? 0.0;
 
-            // Cria um novo objeto Produto (o nosso Modelo)
             $produto = new Produto($name, $categoria, $valorcusto, $valorvenda);
-
-            // Chama o método save() para persistir no banco de dados
             $produto->save();
 
-            // Redireciona para a página principal de produtos
             header('Location: /index.php?controller=produto&action=index');
             exit();
         }
 
-        // Se a requisição não for POST, apenas exibe a página de adicionar produto
         $content_view = __DIR__ . '/../View/adicionar_produto.phtml';
-
-        // Carrega o layout
         require_once __DIR__ . '/../View/layout.phtml';
 
     }
