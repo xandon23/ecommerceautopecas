@@ -30,8 +30,8 @@ class VendaController
             $user = $em->getRepository(User::class)->find(1);
 
             if (!$user) {
-                $user = new User("usuario_teste", password_hash("123456", PASSWORD_DEFAULT));
-                $user->setName("usuario_teste");
+                $user = new User("alexandre23", password_hash("123456", PASSWORD_DEFAULT));
+                $user->setName("alexandre23");
                 $user->setPassword(password_hash("123456", PASSWORD_DEFAULT));
                 $em->persist($user);
                 $em->flush();
