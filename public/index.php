@@ -4,8 +4,9 @@ session_start();
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'user';
-$actionName = isset($_GET['action']) ? $_GET['action'] : 'login';
+$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'home';
+$actionName = isset($_GET['action']) ? $_GET['action'] : 'index';
+
 
 $controllerClass = "App\\Controller\\" . ucfirst($controllerName) . 'Controller';
 
@@ -22,3 +23,4 @@ if (method_exists($controller, $actionName)) {
     echo "Ação não encontrada!";
     exit;
 }
+?>

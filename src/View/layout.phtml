@@ -5,194 +5,184 @@
     <meta charset="UTF-8">
     <title>Parts.COM - Sistema de Vendas</title>
     <style>
-        .styled-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1em;
-        }
+      /* ====== Estrutura base ====== */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background-color: #f3f3f3;
+}
 
-        .styled-table th,
-        .styled-table td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-        .styled-table th {
-            background-color: #f2f2f2;
-        }
+/* ====== Cabeçalho ====== */
+.header {
+    background: linear-gradient(135deg, #fb0303ff, #1b1919ff);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+.header h1 {
+    margin: 0;
+    letter-spacing: 1px;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
+/* ====== Navegação ====== */
+.navigation {
+    background-color: #f60909ff;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.navigation a {
+    flex-grow: 1;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.navigation a:hover {
+    background-color: #0a0a0aff;
+    transform: scale(1.03);
+}
+.navigation a.active {
+    background-color: #ffffffff;
+    pointer-events: none;
+}
+.navigation a.logout-btn {
+    margin-left: auto;
+}
 
-        .container {
-            max-width: 1000px;
-            margin: 20px auto;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+/* ====== Conteúdo ====== */
+.content {
+    padding: 30px;
+    min-height: 400px;
+}
+.content h2 {
+    margin-top: 0;
+    color: #1d1d1d;
+}
 
-        .header {
-            background-color: #0c0841ff;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+/* ====== Tabela ====== */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5em;
+    font-size: 0.95rem;
+}
+.styled-table th,
+.styled-table td {
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    text-align: left;
+}
+.styled-table th {
+    background-color: #250385;
+    color: white;
+}
+.styled-table tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+.styled-table tr:hover {
+    background-color: #e0e0ff;
+}
 
-        .header h1 {
-            margin: 0;
-        }
+/* ====== Botões ====== */
+.button-action {
+    display: inline-block;
+    padding: 10px 18px;
+    background-color: #2bee59;
+    color: white !important;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+.button-action:hover {
+    background-color: #22c74d;
+    transform: scale(1.05);
+}
 
-        .navigation {
-            background-color: #250385ff;
-            display: flex;
-            justify-content: space-between;
-            padding: 0;
-        }
+/* ====== Login ====== */
+.login-box {
+    max-width: 400px;
+    margin: 80px auto;
+    text-align: center;
+}
+.form-container {
+    background-color: #272727;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+}
+.login-box h2,
+.login-box label,
+.login-box .error-message {
+    color: white;
+}
+.login-box input {
+    width: 85%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 1rem;
+}
+.login-box input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+.login-box button {
+    background-color: #2bee59;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: 0.2s;
+}
+.login-box button:hover {
+    background-color: #22c74d;
+    transform: scale(1.05);
+}
 
-        .navigation a {
-            flex-grow: 1;
-            color: white;
-            text-align: center;
-            padding: 14px 0;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
+/* ====== Outras ====== */
+.page-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.venda-header p {
+    font-size: 1.1em;
+    margin: 5px 0;
+}
+.venda-itens h3 {
+    margin-top: 30px;
+}
+.input-quantidade {
+    width: 60px;
+    padding: 5px;
+    box-sizing: border-box;
+}
 
-        .navigation a:hover {
-            background-color: #555;
-        }
-
-        .navigation a.active {
-            background-color: #333;
-            pointer-events: none;
-        }
-
-        .navigation a.logout-btn {
-            margin-left: auto;
-        }
-
-        .content {
-            padding: 20px;
-            min-height: 400px;
-        }
-
-        .content h2 {
-            margin-top: 0;
-        }
-
-        .content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        .content th,
-        .content td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .content th {
-            background-color: #f2f2f2;
-        }
-
-        .content a,
-        .content a:link,
-        .content a:visited {
-            color: #1d1d1dff;
-            text-decoration: none;
-        }
-
-        .content a:hover {
-            text-decoration: underline;
-        }
-
-        .button-action {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #2bee59ff;
-            color: white !important;
-            text-decoration: none;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .login-box {
-            max-width: 400px;
-            margin: 50px auto;
-            text-align: center;
-        }
-
-        .form-container {
-            background-color: #414141ff;
-            padding: 30px;
-            border-radius: 10px;
-        }
-
-        .login-box h2,
-        .login-box label,
-        .login-box .error-message {
-            color: white;
-        }
-
-        .login-box .error-message {
-            margin-bottom: 20px;
-        }
-
-        .login-box input {
-            width: 80%;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            display: block;
-            margin: 10px auto;
-        }
-
-        .login-box button {
-            background-color: #2bee59ff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .page-title {
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
-
-        .venda-header p {
-            font-size: 1.1em;
-            margin: 5px 0;
-        }
-
-        .venda-itens h3 {
-            margin-top: 30px;
-        }
-
-        .input-quantidade {
-            width: 60px;
-            padding: 5px;
-            box-sizing: border-box;
-        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="header">
-            <h1>Parts.COM</h1>
+            <h1>Autopeças</h1>
         </div>
 
         <div class="navigation">
